@@ -22,6 +22,18 @@ import java.io.InputStream;
  */
 public class ShortestDist extends AppCompatActivity {
     public int mode = 0, pux = 0, puy = 0, dox = 0, doy = 0;
+    int ih;
+    int iw;
+    int btrack[][] = new int [][]{{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,1,1,1,1,1,0}, {0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0}, {0,1,1,1,1,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0},
+            {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,1,1,1,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,1,1,1,1,0}, {0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,1,1,0}, {0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0},
+            {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,1,1,1,1,0},
+            {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,1,1,1,1,0},
+            {0,0,0,0,0,0,0}};
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -111,21 +123,11 @@ public class ShortestDist extends AppCompatActivity {
     }
 
     public void main(final ShortestDist shortestDist) {
-        int btrack[][] = new int [][]{{0,0,0,0,0,0,0}, {0,0,0,0,0,0,0}, {0,1,1,1,1,1,0}, {0,1,0,1,0,1,0},
-                {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0},
-                {0,1,0,1,0,1,0}, {0,1,1,1,1,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0},
-                {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,1,1,1,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0},
-                {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,1,1,1,1,0}, {0,1,0,1,0,1,0},
-                {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,1,1,0}, {0,1,0,1,0,1,0},
-                {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0},
-                {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,0,1,0,1,0}, {0,1,1,1,1,1,0},
-                {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,0,0,0,1,0}, {0,1,1,1,1,1,0},
-                {0,0,0,0,0,0,0}};
-        ImageView track = (ImageView) shortestDist.findViewById(R.id.imageView);
-        int ih = track.getHeight();
-        int iw = track.getWidth();
-        ih = ih/45;
-        iw = iw/7;
+          ImageView track = (ImageView) shortestDist.findViewById(R.id.imageView);
+//        int ih = track.getHeight();
+//        int iw = track.getWidth();
+//        ih = ih/45;
+//        iw = iw/7;
 
         if(mode < 2) {
             track.setOnTouchListener( new View.OnTouchListener() {
@@ -144,50 +146,7 @@ public class ShortestDist extends AppCompatActivity {
 
             });
         }
-        /*pux = pux/iw;
-        puy = puy/ih;
-        dox = dox/iw;
-        doy = doy/ih;*/
 
-        // Find road closest to pick up point
-        if(btrack[pux][puy] != 1){
-            for(int a = pux, b = puy; a > 0; a--, b--) {
-                for(int c = 0; c <= (pux-a); c++) {
-                    if(btrack[a+c][b] == 1) {
-                        pux = a+c;
-                        puy = b+c;
-                        a = 0;
-                        break;
-                    }
-                    if(btrack[a][b+c] == 1) {
-                        pux = a+c;
-                        puy = b+c;
-                        a = 0;
-                        break;
-                    }
-                }
-            }
-        }
-
-        //Find road closest to drop off point
-        if(btrack[dox][doy] != 1){
-            for(int a = dox, b = doy; a > 0; a--, b--) {
-                for(int c = 0; c <= (dox-a); c++) {
-                    if(btrack[a+c][b] == 1) {
-                        dox = a+c;
-                        doy = b+c;
-                        a = 0;
-                        break;
-                    }
-                    if(btrack[a][b+c] == 1) {
-                        dox = a+c;
-                        doy = b+c;
-                        a = 0;
-                        break;
-                    }
-                }
-            }
-        }
         /*//show road found for pickup
         ImageView iv = new ImageView(getApplicationContext());
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
@@ -233,6 +192,55 @@ public class ShortestDist extends AppCompatActivity {
             put.setVisibility(View.INVISIBLE);
             dot.setVisibility(View.INVISIBLE);
             mode++;
+        }
+
+        ImageView track = (ImageView) this.findViewById(R.id.imageView);
+        int ih = track.getHeight();
+        int iw = track.getWidth();
+        ih = ih/45;
+        iw = iw/7;
+        pux = pux/iw;
+        puy = puy/ih;
+        dox = dox/iw;
+        doy = doy/ih;
+        // Find road closest to pick up point
+        if(btrack[pux][puy] != 1){
+            for(int a = pux, b = puy; a > 0; a--, b--) {
+                for(int c = 0; c <= (pux-a); c++) {
+                    if(btrack[a+c][b] == 1) {
+                        pux = a+c;
+                        puy = b+c;
+                        a = 0;
+                        break;
+                    }
+                    if(btrack[a][b+c] == 1) {
+                        pux = a+c;
+                        puy = b+c;
+                        a = 0;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //Find road closest to drop off point
+        if(btrack[dox][doy] != 1){
+            for(int a = dox, b = doy; a > 0; a--, b--) {
+                for(int c = 0; c <= (dox-a); c++) {
+                    if(btrack[a+c][b] == 1) {
+                        dox = a+c;
+                        doy = b+c;
+                        a = 0;
+                        break;
+                    }
+                    if(btrack[a][b+c] == 1) {
+                        dox = a+c;
+                        doy = b+c;
+                        a = 0;
+                        break;
+                    }
+                }
+            }
         }
 
     }
