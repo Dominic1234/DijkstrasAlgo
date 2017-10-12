@@ -20,6 +20,7 @@ import java.io.InputStream;
  * status bar and navigation/system bar) with user interaction.
  */
 public class ShortestDist extends AppCompatActivity {
+    public int mode = 0;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -93,7 +94,6 @@ public class ShortestDist extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_shortest_dist);
 
         mVisible = true;
@@ -109,7 +109,7 @@ public class ShortestDist extends AppCompatActivity {
         // while interacting with the UI.
     }
 
-    private static void main(final ShortestDist shortestDist) {
+    public void main(final ShortestDist shortestDist) {
         try {
             InputStream input = shortestDist.getResources().openRawResource(R.raw.map);
         } catch (Resources.NotFoundException e) {
@@ -121,32 +121,39 @@ public class ShortestDist extends AppCompatActivity {
         ih = ih/45;
         iw = iw/7;
 
-        final ImageView rr = (ImageView) shortestDist.findViewById(R.id.imageView);
-        rr.setOnTouchListener(new View.OnTouchListener() {
-
+        ImageView image = (ImageView) shortestDist.findViewById(R.id.imageView);
+        image.setOnTouchListener( new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    int x = (int) event.getX();
-                    int y = (int) event.getY();
-                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
-                            RelativeLayout.LayoutParams.WRAP_CONTENT,
-                            RelativeLayout.LayoutParams.WRAP_CONTENT);
-                    ImageView iv = new ImageView(shortestDist.getApplicationContext());
-                    lp.setMargins(x, y, 0, 0);
-                    iv.setLayoutParams(lp);
-                    iv.setImageDrawable(shortestDist.getResources().getDrawable(
-                            R.drawable.pick_up));
-                    ((ViewGroup) v).addView(iv);
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+
+                    drop();
+                    return true;
                 }
                 return false;
             }
-        });
-        LinearLayout linearLayout = new LinearLayout(shortestDist);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        shortestDist.setContentView(linearLayout);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
 
+
+        });
+
+    }
+
+    private void drop() {
+       /* ImageView iv = new ImageView(getApplicationContext());
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.imageView);
+        if(mode == 0) {
+            iv.setImageDrawable(getDrawable(R.drawable.pick_up));
+            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.CENTER_IN_PARENT, .getId());
+            iv.setLayoutParams(lp);
+            rl.addView(iv);
+            mode++;
+        }
+        else {
+            iv.setImageDrawable(getDrawable(R.drawable.drop_off));
+            mode++;
+        }
+*/
     }
 
     @Override
