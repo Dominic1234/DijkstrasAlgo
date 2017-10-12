@@ -152,7 +152,7 @@ public class ShortestDist extends AppCompatActivity {
         // Find road closest to pick up point
         if(btrack[pux][puy] != 1){
             for(int a = pux, b = puy; a > 0; a--, b--) {
-                for(int c = 0; c < (pux-a); c++) {
+                for(int c = 0; c <= (pux-a); c++) {
                     if(btrack[a+c][b+c] == 1) {
                         pux = a+c;
                         puy = b+c;
@@ -166,7 +166,7 @@ public class ShortestDist extends AppCompatActivity {
         //Find road closest to drop off point
         if(btrack[dox][doy] != 1){
             for(int a = dox, b = doy; a > 0; a--, b--) {
-                for(int c = 0; c < (dox-a); c++) {
+                for(int c = 0; c <= (dox-a); c++) {
                     if(btrack[a+c][b+c] == 1) {
                         dox = a+c;
                         doy = b+c;
