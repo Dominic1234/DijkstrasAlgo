@@ -139,21 +139,25 @@ public class ShortestDist extends AppCompatActivity {
     }
 
     private void drop() {
-       /* ImageView iv = new ImageView(getApplicationContext());
-        RelativeLayout rl = (RelativeLayout) findViewById(R.id.imageView);
+        ImageView iv = new ImageView(getApplicationContext());
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
         if(mode == 0) {
             iv.setImageDrawable(getDrawable(R.drawable.pick_up));
-            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.addRule(RelativeLayout.CENTER_IN_PARENT, .getId());
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.CENTER_IN_PARENT, rl.getId());
             iv.setLayoutParams(lp);
             rl.addView(iv);
             mode++;
         }
         else {
             iv.setImageDrawable(getDrawable(R.drawable.drop_off));
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.CENTER_IN_PARENT, rl.getId());
+            iv.setLayoutParams(lp);
+            rl.addView(iv);
             mode++;
         }
-*/
+
     }
 
     @Override
