@@ -124,10 +124,6 @@ public class ShortestDist extends AppCompatActivity {
 
     public void main(final ShortestDist shortestDist) {
           ImageView track = (ImageView) shortestDist.findViewById(R.id.imageView);
-//        int ih = track.getHeight();
-//        int iw = track.getWidth();
-//        ih = ih/45;
-//        iw = iw/7;
 
         if(mode < 2) {
             track.setOnTouchListener( new View.OnTouchListener() {
@@ -146,22 +142,6 @@ public class ShortestDist extends AppCompatActivity {
 
             });
         }
-
-        /*//show road found for pickup
-        ImageView iv = new ImageView(getApplicationContext());
-        RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
-        iv.setImageDrawable(getDrawable(R.drawable.roadmarker));
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100 , 100);
-        lp.setMargins((pux), (puy), 0, 0);
-        iv.setLayoutParams(lp);
-        rl.addView(iv);
-
-        //show road found for dropoff
-        iv.setImageDrawable(getDrawable(R.drawable.roadmarker));
-        lp.setMargins((dox), (doy), 0, 0);
-        iv.setLayoutParams(lp);
-        rl.addView(iv);
-*/
 
     }
 
@@ -204,18 +184,18 @@ public class ShortestDist extends AppCompatActivity {
         dox = dox/iw;
         doy = doy/ih;
         // Find road closest to pick up point
-        if(btrack[pux][puy] != 1){
-            for(int a = pux, b = puy; a > 0; a--, b--) {
-                for(int c = 0; c <= (pux-a); c++) {
+        if(btrack[puy][pux] != 1){
+            for(int a = puy, b = pux; a > 0; a--, b--) {
+                for(int c = 0; c <= (puy-a); c++) {
                     if(btrack[a+c][b] == 1) {
-                        pux = a+c;
-                        puy = b+c;
+                        puy = a+c;
+                        pux = b+c;
                         a = 0;
                         break;
                     }
                     if(btrack[a][b+c] == 1) {
-                        pux = a+c;
-                        puy = b+c;
+                        puy = a+c;
+                        pux = b+c;
                         a = 0;
                         break;
                     }
@@ -224,24 +204,36 @@ public class ShortestDist extends AppCompatActivity {
         }
 
         //Find road closest to drop off point
-        if(btrack[dox][doy] != 1){
-            for(int a = dox, b = doy; a > 0; a--, b--) {
-                for(int c = 0; c <= (dox-a); c++) {
+        if(btrack[doy][dox] != 1){
+            for(int a = doy, b = dox; a > 0; a--, b--) {
+                for(int c = 0; c <= (doy-a); c++) {
                     if(btrack[a+c][b] == 1) {
-                        dox = a+c;
-                        doy = b+c;
+                        doy = a+c;
+                        dox = b+c;
                         a = 0;
                         break;
                     }
                     if(btrack[a][b+c] == 1) {
-                        dox = a+c;
-                        doy = b+c;
+                        doy = a+c;
+                        dox = b+c;
                         a = 0;
                         break;
                     }
                 }
             }
         }
+        //show road found for pickup
+        iv.setImageDrawable(getDrawable(R.drawable.roadmarker));
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100 , 100);
+        lp.setMargins((pux*iw), (puy*ih), 0, 0);
+        iv.setLayoutParams(lp);
+        rl.addView(iv);
+
+        //show road found for dropoff
+        iv.setImageDrawable(getDrawable(R.drawable.roadmarker));
+        lp.setMargins((dox*iw), (doy*ih), 0, 0);
+        iv.setLayoutParams(lp);
+        rl.addView(iv);
 
     }
 
