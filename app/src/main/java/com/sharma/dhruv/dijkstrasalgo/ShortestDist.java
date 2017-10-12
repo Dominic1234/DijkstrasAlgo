@@ -144,10 +144,10 @@ public class ShortestDist extends AppCompatActivity {
 
             });
         }
-        pux = pux/iw;
+        /*pux = pux/iw;
         puy = puy/ih;
         dox = dox/iw;
-        doy = doy/ih;
+        doy = doy/ih;*/
 
         // Find road closest to pick up point
         if(btrack[pux][puy] != 1){
@@ -188,6 +188,21 @@ public class ShortestDist extends AppCompatActivity {
                 }
             }
         }
+        /*//show road found for pickup
+        ImageView iv = new ImageView(getApplicationContext());
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
+        iv.setImageDrawable(getDrawable(R.drawable.roadmarker));
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100 , 100);
+        lp.setMargins((pux), (puy), 0, 0);
+        iv.setLayoutParams(lp);
+        rl.addView(iv);
+
+        //show road found for dropoff
+        iv.setImageDrawable(getDrawable(R.drawable.roadmarker));
+        lp.setMargins((dox), (doy), 0, 0);
+        iv.setLayoutParams(lp);
+        rl.addView(iv);
+*/
 
     }
 
