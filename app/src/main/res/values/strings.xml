@@ -4,4 +4,6 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="image">image</string>
+    <string name="select_pick">Select Pick</string>
+    <string name="select_drop">Select Drop</string>
 </resources>

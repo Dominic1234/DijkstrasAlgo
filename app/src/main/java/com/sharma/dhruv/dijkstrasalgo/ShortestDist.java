@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.io.InputStream;
 
@@ -20,7 +21,7 @@ import java.io.InputStream;
  * status bar and navigation/system bar) with user interaction.
  */
 public class ShortestDist extends AppCompatActivity {
-    public int mode = 0;
+    public int mode = 0, pux = 0, puy = 0, dox = 0, doy = 0;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -121,40 +122,54 @@ public class ShortestDist extends AppCompatActivity {
         ih = ih/45;
         iw = iw/7;
 
-        ImageView image = (ImageView) shortestDist.findViewById(R.id.imageView);
-        image.setOnTouchListener( new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN){
+        if(mode < 2) {
+            ImageView image = (ImageView) shortestDist.findViewById(R.id.imageView);
+            image.setOnTouchListener( new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if(event.getAction() == MotionEvent.ACTION_DOWN){
+                        int tx = (int) event.getX();
+                        int ty = (int) event.getY();
 
-                    drop();
-                    return true;
+                        drop(tx, ty);
+
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
 
 
-        });
+            });
+        }
 
     }
 
-    private void drop() {
+    private void drop(int px, int py) {
+        TextView put = (TextView) findViewById(R.id.pick_up);
+        TextView dot = (TextView) findViewById(R.id.drop_off);
         ImageView iv = new ImageView(getApplicationContext());
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
         if(mode == 0) {
             iv.setImageDrawable(getDrawable(R.drawable.pick_up));
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            lp.addRule(RelativeLayout.CENTER_IN_PARENT, rl.getId());
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100 , 100);
+            lp.setMargins((px-50), (py-100), 0, 0);
             iv.setLayoutParams(lp);
             rl.addView(iv);
+            pux = px; puy = py;
+            put.setVisibility(View.INVISIBLE);
+            dot.setVisibility(View.VISIBLE);
             mode++;
         }
-        else {
+        else if(mode == 1) {
+
             iv.setImageDrawable(getDrawable(R.drawable.drop_off));
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-            lp.addRule(RelativeLayout.CENTER_IN_PARENT, rl.getId());
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100, 100);
+            lp.setMargins((px-50), (py-100), 0, 0);
             iv.setLayoutParams(lp);
             rl.addView(iv);
+            dox = px; doy = py;
+            put.setVisibility(View.INVISIBLE);
+            dot.setVisibility(View.INVISIBLE);
             mode++;
         }
 

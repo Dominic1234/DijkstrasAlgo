@@ -22,6 +22,22 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/image"
             app:srcCompat="@drawable/track" />
+
+        <TextView
+            android:id="@+id/pick_up"
+            android:layout_width="116dp"
+            android:layout_height="32dp"
+            android:text="@string/select_pick"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/drop_off"
+            android:layout_width="116dp"
+            android:layout_height="32dp"
+            android:text="@string/select_drop"
+            android:textSize="18sp"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <FrameLayout
