@@ -38,6 +38,20 @@
             android:text="@string/select_drop"
             android:textSize="18sp"
             android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/Calculating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/textview"
+            android:visibility="invisible" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <FrameLayout

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -148,6 +149,8 @@ public class ShortestDist extends AppCompatActivity {
     private void drop(int px, int py) {
         TextView put = (TextView) findViewById(R.id.pick_up);
         TextView dot = (TextView) findViewById(R.id.drop_off);
+        TextView cal = (TextView) findViewById(R.id.Calculating);
+        ProgressBar pb = (ProgressBar) findViewById(R.id.progressBar);
         ImageView iv = new ImageView(getApplicationContext());
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.rl);
         if(mode == 0) {
@@ -171,6 +174,8 @@ public class ShortestDist extends AppCompatActivity {
             dox = px; doy = py;
             put.setVisibility(View.INVISIBLE);
             dot.setVisibility(View.INVISIBLE);
+            cal.setVisibility(View.VISIBLE);
+            pb.isActivated();
             mode++;
         }
 

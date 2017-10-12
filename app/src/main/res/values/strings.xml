@@ -6,4 +6,5 @@
     <string name="image">image</string>
     <string name="select_pick">Select Pick</string>
     <string name="select_drop">Select Drop</string>
+    <string name="textview">TextView</string>
 </resources>
