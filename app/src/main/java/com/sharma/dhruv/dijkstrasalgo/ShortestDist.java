@@ -111,11 +111,52 @@ public class ShortestDist extends AppCompatActivity {
     }
 
     public void main(final ShortestDist shortestDist) {
-        try {
-            InputStream input = shortestDist.getResources().openRawResource(R.raw.map);
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-        }
+        int btrack[][] = new int [][]{
+        {0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0},
+        {0,1,1,1,1,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,1,1,1,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,1,1,1,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,1,1,1,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,1,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,0,1,0,1,0},
+        {0,1,1,1,1,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,0,0,0,1,0},
+        {0,1,1,1,1,1,0},
+        {0,0,0,0,0,0,0}};
         ImageView track = (ImageView) shortestDist.findViewById(R.id.imageView);
         int ih = track.getHeight();
         int iw = track.getWidth();
@@ -123,8 +164,7 @@ public class ShortestDist extends AppCompatActivity {
         iw = iw/7;
 
         if(mode < 2) {
-            ImageView image = (ImageView) shortestDist.findViewById(R.id.imageView);
-            image.setOnTouchListener( new View.OnTouchListener() {
+            track.setOnTouchListener( new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if(event.getAction() == MotionEvent.ACTION_DOWN){
@@ -137,7 +177,6 @@ public class ShortestDist extends AppCompatActivity {
                     }
                     return false;
                 }
-
 
             });
         }
