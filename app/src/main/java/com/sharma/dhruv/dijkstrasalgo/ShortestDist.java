@@ -144,6 +144,10 @@ public class ShortestDist extends AppCompatActivity {
 
             });
         }
+        pux = pux/iw;
+        puy = puy/ih;
+        dox = dox/iw;
+        doy = doy/ih;
 
     }
 
