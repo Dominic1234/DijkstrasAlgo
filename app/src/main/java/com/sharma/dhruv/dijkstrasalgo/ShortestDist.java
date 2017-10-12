@@ -149,6 +149,10 @@ public class ShortestDist extends AppCompatActivity {
         dox = dox/iw;
         doy = doy/ih;
 
+        if(btrack[pux][puy] != 1){
+            //for(int a = pux; a > 0; a--)
+        }
+
     }
 
     private void drop(int px, int py) {
