@@ -149,8 +149,32 @@ public class ShortestDist extends AppCompatActivity {
         dox = dox/iw;
         doy = doy/ih;
 
+        // Find road closest to pick up point
         if(btrack[pux][puy] != 1){
-            //for(int a = pux; a > 0; a--)
+            for(int a = pux, b = puy; a > 0; a--, b--) {
+                for(int c = 0; c < (pux-a); c++) {
+                    if(btrack[a+c][b+c] == 1) {
+                        pux = a+c;
+                        puy = b+c;
+                        a = 0;
+                        break;
+                    }
+                }
+            }
+        }
+
+        //Find road closest to drop off point
+        if(btrack[dox][doy] != 1){
+            for(int a = dox, b = doy; a > 0; a--, b--) {
+                for(int c = 0; c < (dox-a); c++) {
+                    if(btrack[a+c][b+c] == 1) {
+                        dox = a+c;
+                        doy = b+c;
+                        a = 0;
+                        break;
+                    }
+                }
+            }
         }
 
     }
