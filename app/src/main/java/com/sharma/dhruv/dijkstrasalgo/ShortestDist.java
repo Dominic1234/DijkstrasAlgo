@@ -153,7 +153,13 @@ public class ShortestDist extends AppCompatActivity {
         if(btrack[pux][puy] != 1){
             for(int a = pux, b = puy; a > 0; a--, b--) {
                 for(int c = 0; c <= (pux-a); c++) {
-                    if(btrack[a+c][b+c] == 1) {
+                    if(btrack[a+c][b] == 1) {
+                        pux = a+c;
+                        puy = b+c;
+                        a = 0;
+                        break;
+                    }
+                    if(btrack[a][b+c] == 1) {
                         pux = a+c;
                         puy = b+c;
                         a = 0;
@@ -167,7 +173,13 @@ public class ShortestDist extends AppCompatActivity {
         if(btrack[dox][doy] != 1){
             for(int a = dox, b = doy; a > 0; a--, b--) {
                 for(int c = 0; c <= (dox-a); c++) {
-                    if(btrack[a+c][b+c] == 1) {
+                    if(btrack[a+c][b] == 1) {
+                        dox = a+c;
+                        doy = b+c;
+                        a = 0;
+                        break;
+                    }
+                    if(btrack[a][b+c] == 1) {
                         dox = a+c;
                         doy = b+c;
                         a = 0;
