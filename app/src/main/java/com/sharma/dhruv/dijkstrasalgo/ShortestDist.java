@@ -1,17 +1,19 @@
 package com.sharma.dhruv.dijkstrasalgo;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.InputStream;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -96,46 +98,55 @@ public class ShortestDist extends AppCompatActivity {
 
         mVisible = true;
         mControlsView = findViewById(R.id.fullscreen_content_controls);
-        mContentView = findViewById(R.id.fullscreen_content);
+        mContentView = findViewById(R.id.imageView);
 
 
         // Set up the user interaction to manually show or hide the system UI.
-        main();
-
+        main(this);
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
     }
 
-    private void main() {
-        File file = new File("main/java/com/sharma/dhruv/map.txt");
-        Scanner input = null;
+    private static void main(final ShortestDist shortestDist) {
         try {
-            input = new Scanner(file);
-        } catch (FileNotFoundException e) {
+            InputStream input = shortestDist.getResources().openRawResource(R.raw.map);
+        } catch (Resources.NotFoundException e) {
             e.printStackTrace();
         }
-        AddTouchListener();
-        ImageView track = (ImageView) findViewById(R.id.imageView);
+        ImageView track = (ImageView) shortestDist.findViewById(R.id.imageView);
         int ih = track.getHeight();
         int iw = track.getWidth();
         ih = ih/45;
         iw = iw/7;
 
-    }
+        final ImageView rr = (ImageView) shortestDist.findViewById(R.id.imageView);
+        rr.setOnTouchListener(new View.OnTouchListener() {
 
-    public void AddTouchListener() {
-        ImageView image = (ImageView) findViewById(R.id.imageView);
-        image.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                float x = event.getX();
-                float y = event.getY();
-
-                return true;
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    int x = (int) event.getX();
+                    int y = (int) event.getY();
+                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.WRAP_CONTENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    ImageView iv = new ImageView(shortestDist.getApplicationContext());
+                    lp.setMargins(x, y, 0, 0);
+                    iv.setLayoutParams(lp);
+                    iv.setImageDrawable(shortestDist.getResources().getDrawable(
+                            R.drawable.pick_up));
+                    ((ViewGroup) v).addView(iv);
+                }
+                return false;
             }
         });
+        LinearLayout linearLayout = new LinearLayout(shortestDist);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        shortestDist.setContentView(linearLayout);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
     }
 
     @Override
